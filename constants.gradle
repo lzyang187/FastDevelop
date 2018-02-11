@@ -1,0 +1,10 @@
+project.ext {
+    //android配置的一些常量
+    minSdkVersion = 15
+    compileSdkVersion = 26
+    targetSdkVersion = 25
+    buildToolsVersion = '26.0.2'
+    supportLibraryVersion = '27.0.2'
+    versionCode = 1
+    versionName = "1"
+}
