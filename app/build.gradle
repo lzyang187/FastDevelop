@@ -3,6 +3,7 @@ apply from: '../constants.gradle'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
+
     defaultConfig {
         applicationId "com.lzy.fastdevelop"
         minSdkVersion project.ext.minSdkVersion
@@ -11,18 +12,21 @@ android {
         versionName project.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:' + project.ext.supportLibraryVersion
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation project(':libUtils')
 }
