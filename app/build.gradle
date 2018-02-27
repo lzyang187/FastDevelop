@@ -4,6 +4,16 @@ apply from: '../constants.gradle'
 android {
     compileSdkVersion project.ext.compileSdkVersion
 
+    signingConfigs {
+        default_sign {
+            keyAlias 'fastdevelop'
+            keyPassword 'lzyang'
+            storeFile file('lzy.keystore')
+            storePassword 'lzyang'
+            v2SigningEnabled true
+        }
+    }
+
     defaultConfig {
         applicationId "com.lzy.fastdevelop"
         minSdkVersion project.ext.minSdkVersion
@@ -14,8 +24,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.default_sign
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.default_sign
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
