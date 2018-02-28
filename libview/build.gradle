@@ -1,38 +1,26 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    signingConfigs {
-        default_sign {
-            keyAlias 'fastdevelop'
-            keyPassword 'lzyang'
-            storeFile file('lzy.keystore')
-            storePassword 'lzyang'
-            v2SigningEnabled true
-        }
-    }
-
     defaultConfig {
-        applicationId "com.lzy.fastdevelop"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        versionCode 1
+        versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
-        debug {
-            signingConfig signingConfigs.default_sign
-        }
         release {
-            signingConfig signingConfigs.default_sign
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
+    resourcePrefix "lib_view_"
 }
 
 dependencies {
@@ -41,5 +29,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':libview')
+    api project(':libUtils')
 }

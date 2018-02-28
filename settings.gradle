@@ -1,1 +1,9 @@
-include ':app', ':libUtils'
+//主工程
+include ':app'
+
+//工具库
+include ':libUtils'
+
+//基础组件
+
+include ':libview'

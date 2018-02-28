@@ -25,3 +25,14 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    //android配置的一些常量
+    minSdkVersion = 18
+    compileSdkVersion = 26
+    targetSdkVersion = 25
+    buildToolsVersion = '26.0.2'
+    supportLibraryVersion = '27.0.2'
+    versionCode = 1
+    versionName = "1"
+}

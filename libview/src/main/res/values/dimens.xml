@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="lib_view_title_height">48dp</dimen>
+    <dimen name="lib_view_back_btn_size">48dp</dimen>
+    <dimen name="lib_view_title_size">18sp</dimen>
+    <!-- 空白图片距离上面的距离 -->
+    <dimen name="lib_view_emptyview_margin_top">70dp</dimen>
+
+</resources>

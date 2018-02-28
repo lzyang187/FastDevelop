@@ -22,8 +22,8 @@ public class StringUtil {
      * @param s 待校验字符串
      * @return {@code true}: null 或全空格<br> {@code false}: 不为 null 且不全空格
      */
-    public static boolean isTrimEmpty(final String s) {
-        return (s == null || s.trim().length() == 0);
+    public static boolean isTrimEmpty(final CharSequence s) {
+        return (s == null || s.toString().trim().length() == 0);
     }
 
     /**
