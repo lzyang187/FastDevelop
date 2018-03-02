@@ -1,3 +1,10 @@
 <resources>
     <string name="lib_view_app_name">libView</string>
+
+    <string name="lib_view_rationale_ask_again">授予权限功能才能正常使用，点击跳转到系统设置页面授予权限。</string>
+    <string name="lib_view_title_settings_dialog">请求权限</string>
+    <string name="lib_view_ok">确定</string>
+    <string name="lib_view_cancel">取消</string>
+    <string name="lib_view_request_contract_permission">开启权限</string>
+    <string name="lib_view_i_know">知道了</string>
 </resources>

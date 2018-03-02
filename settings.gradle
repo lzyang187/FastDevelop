@@ -5,5 +5,4 @@ include ':app'
 include ':libUtils'
 
 //基础组件
-
-include ':libView'
+include ':libView', ':libPermissions'
