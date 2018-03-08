@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/custom_notification_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/biz_core_icon_large" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/custom_notification_time"
+            style="@style/lib_view_NotificationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/custom_notification_title"
+            style="@style/lib_view_NotificationTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/custom_notification_time"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/custom_notification_content"
+            style="@style/lib_view_NotificationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/custom_notification_title"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+</LinearLayout>
