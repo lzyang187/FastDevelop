@@ -9,6 +9,8 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 /**
+ * 获取手机mac地址等工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 16:40
  */

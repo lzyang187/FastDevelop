@@ -12,6 +12,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 公用的线程池
+ *
  * @author: cyli8
  * @date: 2018/2/23 09:14
  */

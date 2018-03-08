@@ -15,16 +15,16 @@ import java.util.Set;
  * @date: 2017/9/22 16:56
  */
 
-public class SharedPreferencesUtils {
+public class SharedPreferencesUtil {
     private SharedPreferences mSP;
 
     public static final String DEFAULT_SP_NAME = "fastdevelop_sp";
 
-    public SharedPreferencesUtils(Context context) {
+    public SharedPreferencesUtil(Context context) {
         mSP = context.getSharedPreferences(DEFAULT_SP_NAME, Context.MODE_PRIVATE);
     }
 
-    public SharedPreferencesUtils(Context context, String spName) {
+    public SharedPreferencesUtil(Context context, String spName) {
         mSP = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 

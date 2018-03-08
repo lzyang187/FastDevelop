@@ -8,6 +8,8 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.List;
 
 /**
+ * json序列化和反序列化工具类，基于fastjson库
+ *
  * @author: cyli8
  * @date: 2018/2/11 16:50
  */

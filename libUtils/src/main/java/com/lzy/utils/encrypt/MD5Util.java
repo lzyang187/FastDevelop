@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 
 /**
+ * md5加密工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 17:17
  */

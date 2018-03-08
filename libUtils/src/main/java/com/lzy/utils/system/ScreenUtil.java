@@ -6,6 +6,8 @@ import android.os.Build;
 import android.view.WindowManager;
 
 /**
+ * 手机屏幕尺寸工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 17:05
  */

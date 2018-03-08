@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * list工具类
+ *
  * @author: cyli8
  * @date: 2018/2/23 09:15
  */

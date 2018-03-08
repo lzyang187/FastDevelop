@@ -9,6 +9,8 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 
 
 /**
+ * 日志初始化类，基于Logger
+ *
  * @author: cyli8
  * @date: 2018/2/11 17:20
  */

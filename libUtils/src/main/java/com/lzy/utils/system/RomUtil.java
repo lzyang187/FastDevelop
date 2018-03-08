@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * 手机系统类型
+ * 手机系统类型工具类
  *
  * @author: cyli8
  * @date: 2018/3/2 10:45

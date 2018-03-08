@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 
 /**
+ * 跳转到系统页面工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 16:55
  */

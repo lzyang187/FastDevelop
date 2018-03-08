@@ -5,6 +5,8 @@ import android.os.Environment;
 import java.io.File;
 
 /**
+ * 操作文件工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 16:15
  */
@@ -12,14 +14,6 @@ import java.io.File;
 public class FileUtil {
     public static boolean isExternalStorageAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
-    }
-
-    public static boolean ensureDirExists(String dir) {
-        File file = new File(dir);
-        if (!file.exists() || !file.isDirectory()) {
-            return file.mkdirs();
-        }
-        return true;
     }
 
     /**
@@ -75,8 +69,27 @@ public class FileUtil {
      */
     public static void delFile(String filePath) {
         File file = new File(filePath);
-        if (file != null && file.exists()) {
+        if (file.exists()) {
             file.delete();
         }
+    }
+
+    /**
+     * 确保目录存在，不存在则创建
+     *
+     * @param dir
+     * @return
+     */
+    public static boolean ensureDirExist(String dir) {
+        File f = new File(dir);
+        if (f.exists()) {
+            if (!f.isDirectory()) {
+                f.delete();
+            } else {
+                return true;
+            }
+        }
+        boolean b = f.mkdirs();
+        return b;
     }
 }

@@ -5,6 +5,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 /**
+ * 复制粘贴工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 17:25
  */

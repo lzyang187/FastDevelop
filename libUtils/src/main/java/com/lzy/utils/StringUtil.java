@@ -1,6 +1,8 @@
 package com.lzy.utils;
 
 /**
+ * 字符串工具类
+ *
  * @author: cyli8
  * @date: 2018/2/11 17:10
  */

@@ -7,6 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * url编码工具类
+ *
  * @author: cyli8
  * @date: 2018/2/23 09:22
  */
