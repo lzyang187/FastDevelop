@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="EasyPermissions" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="lib_permissions_EasyPermissions" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/lib_permissions_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/lib_permissions_colorPrimaryDark</item>
+        <item name="colorAccent">@color/lib_permissions_colorAccent</item>
     </style>
 
-    <style name="EasyPermissions.Transparent">
+    <style name="lib_permissions_EasyPermissions.Transparent">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

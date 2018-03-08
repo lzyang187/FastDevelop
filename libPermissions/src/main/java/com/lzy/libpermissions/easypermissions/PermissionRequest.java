@@ -169,7 +169,7 @@ public final class PermissionRequest {
          * at least once, but has not yet permanently denied your permissions. Should the user
          * permanently deny your permissions, use the {@link AppSettingsDialog} instead.
          * <p>
-         * The default rationale text is {@link R.string#rationale_ask}.
+         * The default rationale text is {@link R.string#lib_permissions_rationale_ask}.
          *
          * @param rationale the rationale to be displayed to the user should they deny your
          *                  permission at least once
@@ -251,7 +251,7 @@ public final class PermissionRequest {
         @NonNull
         public PermissionRequest build() {
             if (mRationale == null) {
-                mRationale = mHelper.getContext().getString(R.string.rationale_ask);
+                mRationale = mHelper.getContext().getString(R.string.lib_permissions_rationale_ask);
             }
             if (mPositiveButtonText == null) {
                 mPositiveButtonText = mHelper.getContext().getString(android.R.string.ok);

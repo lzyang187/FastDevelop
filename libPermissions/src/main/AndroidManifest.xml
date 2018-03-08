@@ -7,7 +7,7 @@
             android:name="com.lzy.libpermissions.easypermissions.AppSettingsDialogHolderActivity"
             android:exported="false"
             android:label=""
-            android:theme="@style/EasyPermissions.Transparent" />
+            android:theme="@style/lib_permissions_EasyPermissions.Transparent" />
     </application>
 
 </manifest>
