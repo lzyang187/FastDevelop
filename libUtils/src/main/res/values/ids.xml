@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- A URI, used by View.getTag(int) -->
-    <item name="ic__uri" type="id" />
+    <item name="lib_utils_ic__uri" type="id" />
 </resources>

@@ -20,6 +20,12 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkAndRequestPermissions("rationalestr", REQUEST_CODE, this, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+//        NotifiManager.startNotify(this, "我是标题", "我是内容", null);
+//        Intent intent = new Intent(this, BaseTitleFragmentActivity.class);
+//        intent.putExtra(BaseFragmentActivity.KEY_FRAGMENT_CLASS_NAME, WebViewFragment.class.getName());
+//        intent.putExtra(WebViewFragment.KEY_WEBVIEW_TITLE, "内嵌浏览器");
+//        intent.putExtra(WebViewFragment.KEY_WEBVIEW_URL, "https://www.baidu.com/");
+//        startActivity(intent);
     }
 
     @Override

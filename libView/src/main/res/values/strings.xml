@@ -7,4 +7,7 @@
     <string name="lib_view_cancel">取消</string>
     <string name="lib_view_request_contract_permission">开启权限</string>
     <string name="lib_view_i_know">知道了</string>
+
+    <string name="lib_view_net_fail_tip">当前网络不可用\n请检查后点击屏幕重试</string>
+
 </resources>

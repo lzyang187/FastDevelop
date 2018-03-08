@@ -34,7 +34,7 @@ public class DeviceUtil {
      * @return MAC 地址
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
-    private static String getMacAddress(Context context) {
+    public static String getMacAddress(Context context) {
         try {
             @SuppressLint("WifiManagerLeak")
             WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);

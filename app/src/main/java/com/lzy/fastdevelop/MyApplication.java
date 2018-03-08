@@ -2,9 +2,12 @@ package com.lzy.fastdevelop;
 
 import android.app.Application;
 
+import com.lzy.bizcore.AppConfig;
 import com.lzy.utils.log.MLog;
 
 /**
+ * 应用的Application
+ *
  * @author: cyli8
  * @date: 2018/2/27 15:34
  */
@@ -14,6 +17,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         MLog.initLogger(BuildConfig.DEBUG);
+        AppConfig.init(this, BuildConfig.DEBUG, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME,
+                getString(R.string.app_name), BuildConfig.APPLICATION_ID);
     }
 }
 
