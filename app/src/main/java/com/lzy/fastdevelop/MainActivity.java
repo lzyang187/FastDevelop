@@ -7,6 +7,7 @@ import com.lzy.libpermissions.easypermissions.EasyPermissions;
 import com.lzy.libpermissions.easypermissions.custom.OnPermissionListener;
 import com.lzy.libview.activity.BaseActivity;
 import com.lzy.utils.ListUtil;
+import com.mcxiaoke.packer.helper.PackerNg;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
 //        intent.putExtra(WebViewFragment.KEY_WEBVIEW_TITLE, "内嵌浏览器");
 //        intent.putExtra(WebViewFragment.KEY_WEBVIEW_URL, "https://www.baidu.com/");
 //        startActivity(intent);
+        String channel = PackerNg.getChannel(this);
+        Logger.e("channel:" + channel);
     }
 
     @Override

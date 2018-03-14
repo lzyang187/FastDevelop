@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'packer'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -53,6 +54,14 @@ android {
         }
     }
 
+    packer {
+        //指定最终输出的渠道包文件名的格式模版
+        archiveNameFormat = '${projectName}-${channel}-${buildType}-${versionCode}'
+        //指定最终输出的渠道包的存储位置
+        archiveOutput = new File(project.rootProject.buildDir, "apks")
+        channelFile = new File(project.rootDir, "markets.txt")
+    }
+
 }
 
 dependencies {
@@ -62,4 +71,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     api project(':bizCore')
+    compile 'com.mcxiaoke.packer-ng:helper:2.0.0'
 }
