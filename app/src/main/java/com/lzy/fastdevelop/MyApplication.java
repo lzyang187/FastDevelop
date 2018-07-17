@@ -3,6 +3,7 @@ package com.lzy.fastdevelop;
 import android.app.Application;
 
 import com.lzy.bizcore.AppConfig;
+import com.lzy.bizcore.fresco.FrescoHelper;
 import com.lzy.utils.log.MLog;
 
 /**
@@ -16,9 +17,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MLog.initLogger(BuildConfig.DEBUG);
         AppConfig.init(this, BuildConfig.DEBUG, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME,
                 getString(R.string.app_name), BuildConfig.APPLICATION_ID);
+        MLog.initLogger(BuildConfig.DEBUG);
+        FrescoHelper.init(this);
     }
 }
 

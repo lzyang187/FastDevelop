@@ -32,4 +32,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     api project(':libView')
     api project(':libHttp')
+    api 'com.facebook.fresco:fresco:' + rootProject.ext.frescoLibraryVersion
+    //如果支持 GIF 图需要导包，注意后面的版本号
+    api 'com.facebook.fresco:animated-gif:' + rootProject.ext.frescoLibraryVersion
+    //使用okhttp加载图片
+    api "com.facebook.fresco:imagepipeline-okhttp3:" + rootProject.ext.frescoLibraryVersion
 }

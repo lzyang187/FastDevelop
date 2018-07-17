@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
@@ -33,6 +33,7 @@ ext {
     targetSdkVersion = 25
     buildToolsVersion = '26.0.2'
     supportLibraryVersion = '27.1.0'
+    frescoLibraryVersion = '1.9.0'
     versionCode = 1
     versionName = "1"
 }

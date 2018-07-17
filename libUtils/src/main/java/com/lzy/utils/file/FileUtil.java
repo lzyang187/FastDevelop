@@ -92,4 +92,26 @@ public class FileUtil {
         boolean b = f.mkdirs();
         return b;
     }
+
+    /**
+     * 递归获取文件或目录下文件大小
+     *
+     * @param file 目录
+     * @return 字节大小
+     */
+    public static long getDirSize(File file) {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                File[] children = file.listFiles();
+                long size = 0;
+                for (File f : children)
+                    size += getDirSize(f);
+                return size;
+            } else {
+                return file.length();
+            }
+        } else {
+            return 0;
+        }
+    }
 }

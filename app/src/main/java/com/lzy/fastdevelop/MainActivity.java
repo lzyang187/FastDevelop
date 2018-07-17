@@ -3,6 +3,8 @@ package com.lzy.fastdevelop;
 import android.Manifest;
 import android.os.Bundle;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.lzy.bizcore.fresco.FrescoHelper;
 import com.lzy.libhttp.MyHttpClient;
 import com.lzy.libpermissions.easypermissions.EasyPermissions;
 import com.lzy.libpermissions.easypermissions.custom.OnPermissionListener;
@@ -50,6 +52,9 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
                 Logger.e("https请求成功：" + response.body().string());
             }
         });
+        SimpleDraweeView sdv = findViewById(R.id.sdv);
+//        FrescoHelper.loadBlurImage(sdv, "http://file.kuyinyun.com/group3/M00/9B/97/rBBGrFkLEKmAIz0HAAGGI-PGKDM212.jpg", 5, 10);
+        FrescoHelper.loadGifResImage(this, sdv, R.mipmap.ic_dog);
     }
 
     @Override
