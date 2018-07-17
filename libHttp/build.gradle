@@ -3,8 +3,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-
-
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -17,19 +15,15 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
-    resourcePrefix "biz_core_"
-
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
-    testImplementation 'junit:junit:4.12'
-    api project(':libView')
-    api project(':libHttp')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation project(':libUtils')
 }

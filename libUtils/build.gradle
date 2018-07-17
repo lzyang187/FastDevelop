@@ -27,9 +27,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     api 'com.alibaba:fastjson:1.1.67.android'
     api 'com.orhanobut:logger:2.1.1'
 }
