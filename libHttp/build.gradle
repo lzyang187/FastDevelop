@@ -26,6 +26,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.lzy.net:okgo:3.0.4'
     implementation project(':libUtils')
 }

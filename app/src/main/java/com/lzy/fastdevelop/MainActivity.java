@@ -5,21 +5,18 @@ import android.os.Bundle;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.lzy.bizcore.fresco.FrescoHelper;
-import com.lzy.libhttp.MyHttpClient;
 import com.lzy.libpermissions.easypermissions.EasyPermissions;
 import com.lzy.libpermissions.easypermissions.custom.OnPermissionListener;
 import com.lzy.libview.activity.BaseActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.lzy.utils.ListUtil;
 import com.mcxiaoke.packer.helper.PackerNg;
 import com.orhanobut.logger.Logger;
 
-import java.io.IOException;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements OnPermissionListener {
 
@@ -38,20 +35,24 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
 //        startActivity(intent);
         String channel = PackerNg.getChannel(this);
         Logger.e("channel:" + channel);
-        Request.Builder builder = new Request.Builder();
         String url = "https://kyfw.12306.cn/otn/";
-        Request request = builder.get().url(url).build();
-        MyHttpClient.getInstance().getHttpClient().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Logger.e("https请求失败：" + e.getMessage());
-            }
+        OkGo.<String>get(url)
+                .tag(this)
+                .retryCount(3)
+                .cacheKey("cacheKey")
+                .cacheTime(5000)
+                .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
+//                .headers("", "")
+//                .params("", "")
+//                .params("", new File(""))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Logger.e("onSuccess\n" + response.body());
+                    }
+                });
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Logger.e("https请求成功：" + response.body().string());
-            }
-        });
+
         SimpleDraweeView sdv = findViewById(R.id.sdv);
 //        FrescoHelper.loadBlurImage(sdv, "http://file.kuyinyun.com/group3/M00/9B/97/rBBGrFkLEKmAIz0HAAGGI-PGKDM212.jpg", 5, 10);
         FrescoHelper.loadGifResImage(this, sdv, R.mipmap.ic_dog);
