@@ -5,7 +5,7 @@ include ':app'
 include ':libUtils'
 
 //基础组件
-include ':libView', ':libPermissions', ':libHttp'
+include ':libView', ':libPermissions', ':libHttp', ':libFileProvider'
 
 //业务层
 include ':bizCore'

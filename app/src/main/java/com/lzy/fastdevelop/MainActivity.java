@@ -1,12 +1,18 @@
 package com.lzy.fastdevelop;
 
 import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.lzy.bizcore.fresco.FrescoHelper;
+import com.lzy.libfileprovider.FileProviderUtil;
 import com.lzy.libpermissions.easypermissions.EasyPermissions;
 import com.lzy.libpermissions.easypermissions.custom.OnPermissionListener;
+import com.lzy.libview.activity.ActivityResultTask;
 import com.lzy.libview.activity.BaseActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
@@ -16,11 +22,19 @@ import com.lzy.utils.ListUtil;
 import com.mcxiaoke.packer.helper.PackerNg;
 import com.orhanobut.logger.Logger;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends BaseActivity implements OnPermissionListener {
 
     private static final int REQUEST_CODE = 10;
+    private static final int REQUEST_CODE_TAKE_PHOTO = 11;
+
+    private File mCurrentPhotoFile;
+    private SimpleDraweeView mSdv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +64,39 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
                     public void onSuccess(Response<String> response) {
                         Logger.e("onSuccess\n" + response.body());
                     }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
                 });
 
 
-        SimpleDraweeView sdv = findViewById(R.id.sdv);
+        mSdv = findViewById(R.id.sdv);
 //        FrescoHelper.loadBlurImage(sdv, "http://file.kuyinyun.com/group3/M00/9B/97/rBBGrFkLEKmAIz0HAAGGI-PGKDM212.jpg", 5, 10);
-        FrescoHelper.loadGifResImage(this, sdv, R.mipmap.ic_dog);
+        FrescoHelper.loadGifResImage(this, mSdv, R.mipmap.ic_dog);
+
+        takePhotoNoCompress();
+    }
+
+
+    public void takePhotoNoCompress() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            String filename = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA)
+                    .format(new Date()) + ".png";
+            mCurrentPhotoFile = new File(Environment.getExternalStorageDirectory(), filename);
+            Uri fileUri = FileProviderUtil.getUriForFile(this, mCurrentPhotoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO, new ActivityResultTask() {
+                @Override
+                public void execute(int resultCode, Intent data) {
+                    if (resultCode == RESULT_OK) {
+                        FrescoHelper.loadFileImage(mSdv, mCurrentPhotoFile);
+                    }
+                }
+            });
+        }
     }
 
     @Override
