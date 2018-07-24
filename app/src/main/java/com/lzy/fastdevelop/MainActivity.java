@@ -19,6 +19,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.utils.ListUtil;
+import com.lzy.utils.statusbar.StatusBarUtil;
 import com.mcxiaoke.packer.helper.PackerNg;
 import com.orhanobut.logger.Logger;
 
@@ -37,9 +38,23 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
     private SimpleDraweeView mSdv;
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+//            StatusBarUtil.HideStatusAndNavigation(this);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.transparentStatus(this);
+//        StatusBarUtil.setStatusBarColor(this, R.color.lib_view_translucent);
         setContentView(R.layout.activity_main);
+//        View statusBarView = findViewById(R.id.statusbar);
+//        statusBarView.getLayoutParams().height = StatusBarUtil.getStatusBarHeight(this);
+//        statusBarView.setBackgroundColor(Color.TRANSPARENT);
+
         checkAndRequestPermissions("rationalestr", REQUEST_CODE, this, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
 //        NotifiManager.startNotify(this, "我是标题", "我是内容", null);
 //        Intent intent = new Intent(this, BaseTitleFragmentActivity.class);
@@ -71,14 +86,12 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
                     }
                 });
 
-
         mSdv = findViewById(R.id.sdv);
-//        FrescoHelper.loadBlurImage(sdv, "http://file.kuyinyun.com/group3/M00/9B/97/rBBGrFkLEKmAIz0HAAGGI-PGKDM212.jpg", 5, 10);
-        FrescoHelper.loadGifResImage(this, mSdv, R.mipmap.ic_dog);
+        FrescoHelper.loadBlurImage(mSdv, "http://file.kuyinyun.com/group3/M00/9B/97/rBBGrFkLEKmAIz0HAAGGI-PGKDM212.jpg", 5, 10);
+//        FrescoHelper.loadGifResImage(this, mSdv, R.mipmap.ic_dog);
 
-        takePhotoNoCompress();
+//        takePhotoNoCompress();
     }
-
 
     public void takePhotoNoCompress() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.lzy.fastdevelop.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <View
+        android:id="@+id/statusbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         fresco:placeholderImage="@mipmap/ic_launcher" />
 
 </RelativeLayout>
