@@ -21,6 +21,9 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi'
+        }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,7 +31,7 @@ android {
         abi {
             enable true
             reset()
-//            include 'armeabi'
+            include 'armeabi'
             universalApk false
         }
     }
@@ -50,6 +53,9 @@ android {
         }
         release {
             signingConfig signingConfigs.default_sign
+            //启用资源压缩
+            shrinkResources true
+            zipAlignEnabled true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
