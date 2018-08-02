@@ -16,30 +16,30 @@ import com.orhanobut.logger.PrettyFormatStrategy;
  */
 
 public class MLog {
-    public static final String DEFAULT_LOG = "lzy";
+    private static final String DEFAULT_TAG = "lzy";
 
-    public static void initLogger(final boolean logable) {
+    public static void initLogger(final boolean logAble) {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(0)         // (Optional) How many method line to show. Default 2
                 .methodOffset(0)        // (Optional) Hides internal method calls up to offset. Default 0
 //                .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
-                .tag(DEFAULT_LOG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .tag(DEFAULT_TAG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
             @Override
             public boolean isLoggable(int priority, String tag) {
-                return logable;
+                return logAble;
             }
         });
 
         FormatStrategy fileformatStrategy = CsvFormatStrategy.newBuilder()
-                .tag(DEFAULT_LOG)
+                .tag(DEFAULT_TAG)
                 .build();
         Logger.addLogAdapter(new DiskLogAdapter(fileformatStrategy) {
             @Override
             public boolean isLoggable(int priority, String tag) {
-                return logable;
+                return logAble;
             }
         });
     }
