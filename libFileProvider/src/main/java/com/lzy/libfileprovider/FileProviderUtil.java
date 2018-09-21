@@ -15,7 +15,7 @@ import java.io.File;
  * @date: 2018/7/23 10:09
  */
 public class FileProviderUtil {
-    private static final String AUTHORITY_FILE_PROVIDER_SUFFIX = ".fileProvider";
+    private static final String AUTHORITY_FILE_PROVIDER_SUFFIX = ".fastdevelop.fileProvider";
 
     public static Uri getUriForFile(Context context, File file) {
         Uri fileUri;
