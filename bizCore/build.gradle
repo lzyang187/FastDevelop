@@ -28,14 +28,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
-    testImplementation 'junit:junit:4.12'
     api project(':libView')
     api project(':libHttp')
     api project(':libFileProvider')
-    api 'com.facebook.fresco:fresco:' + rootProject.ext.frescoLibraryVersion
-    //如果支持 GIF 图需要导包，注意后面的版本号
-    api 'com.facebook.fresco:animated-gif:' + rootProject.ext.frescoLibraryVersion
-    //使用okhttp加载图片
-    api "com.facebook.fresco:imagepipeline-okhttp3:" + rootProject.ext.frescoLibraryVersion
+    api project(':libBaseFun')
+    api project(':libUtils')
 }

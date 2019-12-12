@@ -24,7 +24,7 @@ public class TimeUtil {
     }
 
     public static long formatTimeToMillis(String timeType, String time) {
-        SimpleDateFormat format = new SimpleDateFormat(timeType);
+        SimpleDateFormat format = new SimpleDateFormat(timeType, Locale.CHINA);
         try {
             Date date = format.parse(time);
             return date.getTime();
@@ -35,7 +35,7 @@ public class TimeUtil {
 
     public static boolean isCurDate(long lastTime) {
         long timeMillis = System.currentTimeMillis();
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String sp_time = sf.format(lastTime);
         String current_time = sf.format(timeMillis);
         return sp_time.equals(current_time);

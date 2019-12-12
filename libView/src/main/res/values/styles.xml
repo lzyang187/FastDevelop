@@ -24,8 +24,14 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="lib_view_AppTheme" parent="Theme.AppCompat.NoActionBar">
-
+    <!-- Base application theme. -->
+    <style name="lib_view_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/lib_view_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/lib_view_colorPrimaryDark</item>
+        <item name="colorAccent">@color/lib_view_colorPrimary</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
 
     <style name="lib_view_EasyPermissions" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -69,6 +75,29 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="lib_view_Theme.ToolBar.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@mipmap/ic_menu_more_overflow</item>
+    </style>
+
+    <style name="lib_view_Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionOverflowButtonStyle">@style/lib_view_Theme.ToolBar.Overflow</item>
+    </style>
+
+    <style name="lib_view_Theme.ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="lib_view_Theme.ToolBar.Subtitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="lib_view_Theme.ToolBar.PopupMenu" parent="Widget.AppCompat.Light.PopupMenu">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>

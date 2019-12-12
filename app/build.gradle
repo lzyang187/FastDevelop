@@ -20,20 +20,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-        multiDexEnabled true
         ndk {
             abiFilters 'armeabi'
         }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'armeabi'
-            universalApk false
-        }
     }
 
     dexOptions {
@@ -49,10 +39,13 @@ android {
 
     buildTypes {
         debug {
+            debuggable true
+            minifyEnabled false
             signingConfig signingConfigs.default_sign
         }
         release {
             signingConfig signingConfigs.default_sign
+            debuggable false
             //启用资源压缩
             shrinkResources true
             zipAlignEnabled true
@@ -73,11 +66,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':bizCore')
-    implementation 'com.mcxiaoke.packer-ng:helper:2.0.0'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.mcxiaoke.packer-ng:helper:2.0.1'
 }

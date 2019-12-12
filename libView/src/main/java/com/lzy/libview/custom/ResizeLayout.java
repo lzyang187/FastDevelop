@@ -1,10 +1,10 @@
 package com.lzy.libview.custom;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.util.AttributeSet;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
-
-import com.lzy.utils.system.ScreenUtil;
 
 /**
  * 可监听布局的大小变化以及软键盘的弹出或隐藏
@@ -19,30 +19,24 @@ public class ResizeLayout extends RelativeLayout {
                            boolean showing);
     }
 
-    int count = 0;
-    int count1 = 0;
-    int count2 = 0;
     private OnSizeChangedListener mSizeChangedListener;
 
     private boolean mShowInput;
-    private Context mContext;
-
-    // 定义默认的软键盘最小高度，这是为了避免onSizeChanged在某些下特殊情况下出现的问题。
-    private static final String TAG = "ResizeLayout";
+    private int mScreenHeight;
 
     public ResizeLayout(Context context) {
         super(context);
-        mContext = context;
+        mScreenHeight = getScreenHeight(context);
     }
 
     public ResizeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
+        mScreenHeight = getScreenHeight(context);
     }
 
     public ResizeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mContext = context;
+        mScreenHeight = getScreenHeight(context);
     }
 
     public void setOnSizeChangedListener(OnSizeChangedListener l) {
@@ -52,11 +46,10 @@ public class ResizeLayout extends RelativeLayout {
     @Override
     protected void onSizeChanged(int w, final int h, int oldw, final int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        int height = ScreenUtil.getScreenHeight(mContext);
-        if (oldh > h && oldh < height && (oldh - h) > (height / 3)) { //修复软键盘是否弹起的bug，这里阀值设为屏幕高的1/3
+        if (oldh > h && oldh < mScreenHeight && (oldh - h) > (mScreenHeight / 3)) { //这里阀值设为屏幕高的1/3
             // 软键盘弹出
             mShowInput = true;
-        } else if ((h - oldh) > (height / 3)) {
+        } else if ((h - oldh) > (mScreenHeight / 3)) {
             // 软键盘收起
             mShowInput = false;
         }
@@ -85,4 +78,20 @@ public class ResizeLayout extends RelativeLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
+    /**
+     * 获取屏幕的高度（单位：px）
+     *
+     * @return 屏幕高
+     */
+    public static int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (wm == null) {
+            return context.getResources().getDisplayMetrics().heightPixels;
+        }
+        Point point = new Point();
+        wm.getDefaultDisplay().getRealSize(point);
+        return point.y;
+    }
+
 }

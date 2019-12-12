@@ -13,7 +13,6 @@ import com.lzy.utils.system.ScreenUtil;
  */
 
 public class AppConfig {
-    public static String MAC;
     public static String IMEI;
     public static String ANDROID_ID;
 
@@ -22,18 +21,19 @@ public class AppConfig {
     public static String VERSION_NAME;
     public static String APP_NAME;
     public static String PACKAGE_NAME;
+    public static String CHANNEL;
 
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
 
     public static void init(Context context, boolean debug, int versionCode, String versionName,
-                            String appName, String packageName) {
+                            String appName, String packageName, String channel) {
         DEBUG = debug;
         VERSION_CODE = versionCode;
         VERSION_NAME = versionName;
         APP_NAME = appName;
+        CHANNEL = channel;
         PACKAGE_NAME = packageName;
-        MAC = DeviceUtil.getMacAddress(context);
         IMEI = DeviceUtil.getIMEI(context);
         ANDROID_ID = DeviceUtil.getAndroidID(context);
         SCREEN_WIDTH = ScreenUtil.getScreenWidth(context);

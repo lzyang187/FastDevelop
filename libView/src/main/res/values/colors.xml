@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="lib_view_colorPrimary">#fa436f</color>
+    <color name="lib_view_colorPrimaryDark">#e0fa436f</color>
     <drawable name="lib_view_transparent">#00000000</drawable>
     <drawable name="lib_view_bg_activity">#f4f9ff</drawable>
     <color name="lib_view_bg_activity">#f4f9ff</color>
-    <drawable name="lib_view_bg_view_title">#f7f7f7</drawable>
-    <color name="lib_view_color_title">#404040</color>
     <color name="lib_view_color_line">#e0e0e0</color>
-    <color name="lib_view_color_rightbtn">#fa436f</color>
 
     <drawable name="lib_view_def_selector_sel">#e0e0e0</drawable>
     <drawable name="lib_view_def_selector_nor">#ffffff</drawable>

@@ -2,7 +2,6 @@ package com.lzy.utils.system;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.os.Build;
 import android.view.WindowManager;
 
 /**
@@ -24,11 +23,7 @@ public class ScreenUtil {
             return context.getResources().getDisplayMetrics().widthPixels;
         }
         Point point = new Point();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            wm.getDefaultDisplay().getRealSize(point);
-        } else {
-            wm.getDefaultDisplay().getSize(point);
-        }
+        wm.getDefaultDisplay().getRealSize(point);
         return point.x;
     }
 
@@ -43,11 +38,7 @@ public class ScreenUtil {
             return context.getResources().getDisplayMetrics().heightPixels;
         }
         Point point = new Point();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            wm.getDefaultDisplay().getRealSize(point);
-        } else {
-            wm.getDefaultDisplay().getSize(point);
-        }
+        wm.getDefaultDisplay().getRealSize(point);
         return point.y;
     }
 }

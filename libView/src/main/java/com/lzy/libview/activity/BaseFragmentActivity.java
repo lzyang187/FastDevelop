@@ -2,9 +2,8 @@ package com.lzy.libview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
+
+import androidx.fragment.app.FragmentTransaction;
 
 import com.lzy.libview.R;
 import com.lzy.libview.fragment.BaseFragment;
@@ -17,43 +16,34 @@ import com.lzy.libview.fragment.BaseFragment;
  */
 
 public class BaseFragmentActivity extends BaseActivity {
+
     public static final String KEY_FRAGMENT_CLASS_NAME = "fragment_class_name";
 
-    public static final int INIT_WITH_FRAGMENT = 1;
-    public static final int INIT_WITH_VIEW = 2;
-
-    protected BaseFragment mFragment;
-    protected FragmentManager mFragmentManager;
+    private BaseFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutID());
-
-        if (getInitMode() == INIT_WITH_FRAGMENT) {
-            Intent intent = getIntent();
-            mFragment = getFragment(intent);
-            if (null == mFragment) {
-                finish();
-                return;
-            }
-
-            // 管理器
-            mFragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.fragment_container, mFragment, "fragment");
-            fragmentTransaction.commitAllowingStateLoss();
-        } else {// 使用View进行初始化
-
+        Intent intent = getIntent();
+        initArgument(intent);
+        mFragment = getFragment(intent);
+        if (null == mFragment) {
+            finish();
+            return;
         }
+        // 管理器
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.container, mFragment, "fragment");
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
-    protected int getInitMode() {
-        return INIT_WITH_FRAGMENT;
+    protected void initArgument(Intent intent) {
+
     }
 
     protected int getLayoutID() {
-        return R.layout.lib_view_activity_fragment;
+        return R.layout.lib_view_activity_base;
     }
 
     protected BaseFragment getFragment(Intent intent) {
@@ -63,54 +53,11 @@ public class BaseFragmentActivity extends BaseActivity {
                 BaseFragment fragment = (BaseFragment) Class.forName(clsName).newInstance();
                 fragment.setArguments(intent.getExtras());
                 return fragment;
-            } catch (Exception e) {
+            } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
         return null;
     }
 
-    protected Intent getResultIntent() {
-        if (null != mFragment) {
-            return mFragment.getResultIntent();
-        }
-        return null;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (null != mFragment) {
-            mFragment.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        try {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                Intent intent = getResultIntent();
-                if (null != intent) {
-                    setResult(RESULT_OK, intent);
-                }
-            }
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
-        if (null != mFragment && mFragment instanceof IOnKeyDownEvent) {
-            if (((IOnKeyDownEvent) mFragment).onKeyDownEvent(keyCode, event)) {
-                return true;
-            }
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (null != mFragment) {
-            if (mFragment.onBackPressed()) {
-                return;
-            }
-        }
-        super.onBackPressed();
-    }
 }

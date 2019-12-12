@@ -7,8 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.mcxiaoke.packer-ng:plugin:2.0.0'
+        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.mcxiaoke.packer-ng:plugin:2.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -28,12 +28,10 @@ task clean(type: Delete) {
 
 ext {
     //android配置的一些常量
-    minSdkVersion = 18
-    compileSdkVersion = 26
-    targetSdkVersion = 25
-    buildToolsVersion = '26.0.2'
-    supportLibraryVersion = '27.1.0'
-    frescoLibraryVersion = '1.9.0'
+    minSdkVersion = 21
+    compileSdkVersion = 28
+    targetSdkVersion = 27
+    androidXVersion = '1.1.0'
     versionCode = 1
     versionName = "1"
 }

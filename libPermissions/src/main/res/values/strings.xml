@@ -1,8 +1,0 @@
-<resources>
-    <string name="lib_permissions_rationale_ask">This app may not work correctly without the requested permissions.</string>
-    <string name="lib_permissions_rationale_ask_again">
-        This app may not work correctly without the requested permissions.
-        Open the app settings screen to modify app permissions.
-    </string>
-    <string name="lib_permissions_title_settings_dialog">Permissions Required</string>
-</resources>

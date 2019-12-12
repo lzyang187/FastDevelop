@@ -26,7 +26,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
     api 'com.alibaba:fastjson:1.1.67.android'
     api 'com.orhanobut:logger:2.1.1'
+    implementation 'androidx.annotation:annotation:1.1.0'
 }

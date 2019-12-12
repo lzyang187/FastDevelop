@@ -23,8 +23,7 @@ public class DeviceUtil {
      */
     @SuppressLint("HardwareIds")
     public static String getAndroidID(Context context) {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID
-        );
+        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     /**

@@ -41,15 +41,6 @@ public class UrlHelper {
         return url.startsWith("http://") || url.startsWith("https://");
     }
 
-    public static boolean isFrescoAllowUrl(String url) {
-        if (null == url || "".equals(url.trim())) {
-            return false;
-        }
-        url = url.trim();
-        return url.startsWith("file://") || url.startsWith("content://") | url.startsWith("res://")
-                || isUrlValid(url) || isAssetsUrl(url);
-    }
-
     public static boolean isAssetsUrl(String url) {
         if (null == url || "".equals(url.trim())) {
             return false;

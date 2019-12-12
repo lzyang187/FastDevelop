@@ -1,115 +1,62 @@
 package com.lzy.fastdevelop;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
+import android.widget.ImageView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.lzy.bizcore.fresco.FrescoHelper;
-import com.lzy.libfileprovider.FileProviderUtil;
-import com.lzy.libpermissions.easypermissions.EasyPermissions;
-import com.lzy.libpermissions.easypermissions.custom.OnPermissionListener;
-import com.lzy.libview.activity.ActivityResultTask;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.request.RequestOptions;
+import com.lzy.bizcore.AppConfig;
+import com.lzy.bizcore.helper.NotifiManager;
+import com.lzy.bizcore.webview.WebViewFragment;
 import com.lzy.libview.activity.BaseActivity;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
+import com.lzy.libview.activity.BaseFragmentActivity;
+import com.lzy.libview.activity.BaseTitleFragmentActivity;
+import com.lzy.libview.dialog.CustomAskDialog;
+import com.lzy.libview.permission.OnPermissionListener;
 import com.lzy.utils.ListUtil;
 import com.lzy.utils.statusbar.StatusBarUtil;
-import com.mcxiaoke.packer.helper.PackerNg;
 import com.orhanobut.logger.Logger;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity implements OnPermissionListener {
 
     private static final int REQUEST_CODE = 10;
-    private static final int REQUEST_CODE_TAKE_PHOTO = 11;
-
-    private File mCurrentPhotoFile;
-    private SimpleDraweeView mSdv;
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-//            StatusBarUtil.HideStatusAndNavigation(this);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.transparentStatus(this);
-//        StatusBarUtil.setStatusBarColor(this, R.color.lib_view_translucent);
         setContentView(R.layout.activity_main);
-//        View statusBarView = findViewById(R.id.statusbar);
-//        statusBarView.getLayoutParams().height = StatusBarUtil.getStatusBarHeight(this);
-//        statusBarView.setBackgroundColor(Color.TRANSPARENT);
 
-        checkAndRequestPermissions("rationalestr", REQUEST_CODE, this, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
-//        NotifiManager.startNotify(this, "我是标题", "我是内容", null);
-//        Intent intent = new Intent(this, BaseTitleFragmentActivity.class);
-//        intent.putExtra(BaseFragmentActivity.KEY_FRAGMENT_CLASS_NAME, WebViewFragment.class.getName());
-//        intent.putExtra(WebViewFragment.KEY_WEBVIEW_TITLE, "内嵌浏览器");
-//        intent.putExtra(WebViewFragment.KEY_WEBVIEW_URL, "https://www.baidu.com/");
-//        startActivity(intent);
-        String channel = PackerNg.getChannel(this);
-        Logger.e("channel:" + channel);
-        String url = "https://kyfw.12306.cn/otn/";
-        OkGo.<String>get(url)
-                .tag(this)
-                .retryCount(3)
-                .cacheKey("cacheKey")
-                .cacheTime(5000)
-                .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
-//                .headers("", "")
-//                .params("", "")
-//                .params("", new File(""))
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        Logger.e("onSuccess\n" + response.body());
-                    }
+        checkAndRequestPermissions("不授予权限，功能无法使用哦", REQUEST_CODE, this, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+        Intent intent = new Intent(this, BaseTitleFragmentActivity.class);
+        intent.putExtra(BaseFragmentActivity.KEY_FRAGMENT_CLASS_NAME, WebViewFragment.class.getName());
+        intent.putExtra(WebViewFragment.KEY_WEB_VIEW_URL, "https://www.baidu.com/");
+        NotifiManager.startNotify(this, "我是标题", "我是内容", PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_CANCEL_CURRENT));
 
-        mSdv = findViewById(R.id.sdv);
-        FrescoHelper.loadBlurImage(mSdv, "http://file.kuyinyun.com/group3/M00/9B/97/rBBGrFkLEKmAIz0HAAGGI-PGKDM212.jpg", 5, 10);
-//        FrescoHelper.loadGifResImage(this, mSdv, R.mipmap.ic_dog);
+        CustomAskDialog dialog = new CustomAskDialog("标题", "内容");
+        dialog.show(getSupportFragmentManager(), "ask");
 
-//        takePhotoNoCompress();
-    }
+        ImageView iv = findViewById(R.id.imageview);
+        Glide.with(this)
+                .load("https://www.wanandroid.com/blogimgs/90c6cc12-742e-4c9f-b318-b912f163b8d0.png")
+                .apply(RequestOptions.bitmapTransform(new MultiTransformation<>(new BlurTransformation(25, 5), new GrayscaleTransformation())))
+                .into(iv);
 
-    public void takePhotoNoCompress() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            String filename = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA)
-                    .format(new Date()) + ".png";
-            mCurrentPhotoFile = new File(Environment.getExternalStorageDirectory(), filename);
-            Uri fileUri = FileProviderUtil.getUriForFile(this, mCurrentPhotoFile);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO, new ActivityResultTask() {
-                @Override
-                public void execute(int resultCode, Intent data) {
-                    if (resultCode == RESULT_OK) {
-                        FrescoHelper.loadFileImage(mSdv, mCurrentPhotoFile);
-                    }
-                }
-            });
-        }
+        Logger.i("androidid=" + AppConfig.ANDROID_ID + " imei=" + AppConfig.IMEI +
+                " width=" + AppConfig.SCREEN_WIDTH + " height=" + AppConfig.SCREEN_HEIGHT + " channel=" + AppConfig.CHANNEL);
+
+
     }
 
     @Override
@@ -138,7 +85,7 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
                 Logger.d("写sd卡权限已拒绝");
             }
         }
-        if (!gotoSettingActivity(perms, "rationalestr")) {
+        if (!gotoSettingActivity(perms, getString(R.string.lib_view_rationale_settings_dialog))) {
             Logger.d("用户没有选中不再提示");
         }
     }

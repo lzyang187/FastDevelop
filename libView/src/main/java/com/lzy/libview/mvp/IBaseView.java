@@ -18,33 +18,11 @@ public interface IBaseView {
     boolean isViewAttached();
 
     /**
-     * 显示等待框
-     *
-     * @param l 取消观察者
-     */
-    void showWaitingDialog(DialogInterface.OnCancelListener l);
-
-    /**
-     * 显示等待框
-     *
-     * @param l    取消观察者
-     * @param tips 提示语
-     */
-    void showWaitingDialog(DialogInterface.OnCancelListener l, String tips);
-
-    /**
-     * 更新等待框提示语
+     * 等待框
      *
      * @param tips 提示语
      */
-    void updateWaittingTips(String tips);
-
-    /**
-     * 设置对话框是否可以被取消
-     *
-     * @param cancel true,可取消
-     */
-    void setWaittingDlgCancel(boolean cancel);
+    void showWaitingDialog(String tips, boolean cancel, DialogInterface.OnCancelListener listener);
 
     /**
      * 消失等待对话框

@@ -1,9 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowBackground">@android:color/white</item>
-    </style>
+
 
 </resources>

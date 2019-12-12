@@ -16,15 +16,14 @@ import com.orhanobut.logger.PrettyFormatStrategy;
  */
 
 public class MLog {
-    private static final String DEFAULT_TAG = "lzy";
 
-    public static void initLogger(final boolean logAble) {
+    public static void initLogger(String defaultTAG, final boolean logAble) {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(0)         // (Optional) How many method line to show. Default 2
                 .methodOffset(0)        // (Optional) Hides internal method calls up to offset. Default 0
 //                .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
-                .tag(DEFAULT_TAG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .tag(defaultTAG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
             @Override
@@ -34,7 +33,7 @@ public class MLog {
         });
 
         FormatStrategy fileformatStrategy = CsvFormatStrategy.newBuilder()
-                .tag(DEFAULT_TAG)
+                .tag(defaultTAG)
                 .build();
         Logger.addLogAdapter(new DiskLogAdapter(fileformatStrategy) {
             @Override

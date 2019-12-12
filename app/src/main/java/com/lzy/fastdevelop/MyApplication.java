@@ -1,13 +1,15 @@
 package com.lzy.fastdevelop;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.lzy.bizcore.AppConfig;
-import com.lzy.bizcore.fresco.FrescoHelper;
-import com.lzy.libhttp.OkGoHelper;
+import com.lzy.libbasefun.lru.DiskLruCacheMgr;
+import com.lzy.libhttp.MyOkHttpClient;
+import com.lzy.utils.StringUtil;
 import com.lzy.utils.log.MLog;
+import com.mcxiaoke.packer.helper.PackerNg;
+
+import java.io.File;
 
 /**
  * 应用的Application
@@ -19,19 +21,17 @@ import com.lzy.utils.log.MLog;
 public class MyApplication extends Application {
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
+        String channel = PackerNg.getChannel(this);
+        if (StringUtil.isEmpty(channel)) {
+            channel = getString(R.string.official_channel);
+        }
         AppConfig.init(this, BuildConfig.DEBUG, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME,
-                getString(R.string.app_name), BuildConfig.APPLICATION_ID);
-        MLog.initLogger(BuildConfig.DEBUG);
-        OkGoHelper.init(this);
-        FrescoHelper.init(this);
+                getString(R.string.app_name), BuildConfig.APPLICATION_ID, channel);
+        MLog.initLogger(AppConfig.APP_NAME, BuildConfig.DEBUG);
+        MyOkHttpClient.setCacheFile(new File(getExternalCacheDir(), "http"));
+        DiskLruCacheMgr.getInstance().init(this);
     }
 }
 
