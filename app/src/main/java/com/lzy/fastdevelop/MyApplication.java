@@ -29,7 +29,7 @@ public class MyApplication extends Application {
         }
         AppConfig.init(this, BuildConfig.DEBUG, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME,
                 getString(R.string.app_name), BuildConfig.APPLICATION_ID, channel);
-        MLog.initLogger(AppConfig.APP_NAME, BuildConfig.DEBUG);
+//        MLog.initLogger(AppConfig.APP_NAME, BuildConfig.DEBUG);
         MyOkHttpClient.setCacheFile(new File(getExternalCacheDir(), "http"));
         DiskLruCacheMgr.getInstance().init(this);
     }

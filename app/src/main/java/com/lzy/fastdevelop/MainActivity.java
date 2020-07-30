@@ -4,12 +4,12 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.request.RequestOptions;
-import com.lzy.bizcore.AppConfig;
 import com.lzy.bizcore.helper.NotifiManager;
 import com.lzy.bizcore.webview.WebViewFragment;
 import com.lzy.libview.activity.BaseActivity;
@@ -19,9 +19,16 @@ import com.lzy.libview.dialog.CustomAskDialog;
 import com.lzy.libview.permission.OnPermissionListener;
 import com.lzy.utils.ListUtil;
 import com.lzy.utils.statusbar.StatusBarUtil;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.DiskLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
@@ -53,8 +60,67 @@ public class MainActivity extends BaseActivity implements OnPermissionListener {
                 .apply(RequestOptions.bitmapTransform(new MultiTransformation<>(new BlurTransformation(25, 5), new GrayscaleTransformation())))
                 .into(iv);
 
-        Logger.i("androidid=" + AppConfig.ANDROID_ID + " imei=" + AppConfig.IMEI +
-                " width=" + AppConfig.SCREEN_WIDTH + " height=" + AppConfig.SCREEN_HEIGHT + " channel=" + AppConfig.CHANNEL);
+        Log.d("Tag", "I'm a log which you don't see easily, hehe");
+        Log.d("json content", "{ \"key\": 3, \n \"value\": something}");
+        Log.d("error", "There is a crash somewhere or any warning");
+
+        Logger.addLogAdapter(new AndroidLogAdapter());
+        Logger.d("message");
+
+        Logger.clearLogAdapters();
+
+
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
+                .methodCount(0)         // (Optional) How many method line to show. Default 2
+                .methodOffset(3)        // (Optional) Skips some method invokes in stack trace. Default 5
+//        .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
+                .tag("My custom tag")   // (Optional) Custom tag for each log. Default PRETTY_LOGGER
+                .build();
+
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+
+        Logger.addLogAdapter(new AndroidLogAdapter() {
+            @Override public boolean isLoggable(int priority, String tag) {
+                return BuildConfig.DEBUG;
+            }
+        });
+
+        Logger.addLogAdapter(new DiskLogAdapter());
+
+
+        Logger.w("no thread info and only 1 method");
+
+        Logger.clearLogAdapters();
+        formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)
+                .methodCount(0)
+                .build();
+
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+        Logger.i("no thread info and method info");
+
+        Logger.t("tag").e("Custom tag for only one use");
+
+        Logger.json("{ \"key\": 3, \"value\": something}");
+
+        Logger.d(Arrays.asList("foo", "bar"));
+
+        Map<String, String> map = new HashMap<>();
+        map.put("key", "value");
+        map.put("key1", "value2");
+
+        Logger.d(map);
+
+        Logger.clearLogAdapters();
+        formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)
+                .methodCount(0)
+                .tag("MyTag")
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+
+        Logger.w("my log message with my tag");
 
 
     }
